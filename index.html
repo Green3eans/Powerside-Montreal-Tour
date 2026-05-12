@@ -100,7 +100,20 @@
       letter-spacing: 0.03em;
       text-transform: uppercase;
     }
+    .brand-logo {
+      display: block;
+      width: min(260px, 70vw);
+      max-height: 90px;
+      object-fit: contain;
+      margin: 22px 0 18px;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.22));
+    }
 
+    .brand-logo-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
     h1 {
       font-size: clamp(2.4rem, 7vw, 5.4rem);
       line-height: 0.96;
