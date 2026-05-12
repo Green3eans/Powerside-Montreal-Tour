@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Montreal Guided Tour + Facility Reception | RSVP</title>
+  <meta name="description" content="RSVP page for a company-hosted guided Montreal city tour, facility visit, and reception." />
+
+  <!--
+    HOW TO USE THIS FILE
+    1) Save this file as index.html in your GitHub Pages repository.
+    2) Replace the TODO placeholders below.
+    3) Optional: add a Montreal skyline image at assets/montreal-skyline.jpg.
+    4) Create a Google Form for RSVP and paste the public form link into RSVP_FORM_URL.
+    5) After publishing, create a QR code to the GitHub Pages URL.
+  -->
+
+  <!-- Social preview; update before sharing -->
+  <meta property="og:title" content="Montreal Guided Tour + Facility Reception" />
+  <meta property="og:description" content="Join us for a guided city tour, facility visit, drinks on the bus, and a reception with charcuterie and heavy hors d'oeuvres." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/montreal-skyline.jpg" />
+
+  <style>
+    :root {
+      --brand: #12233f;
+      --brand-2: #265b8f;
+      --accent: #d7b46a;
+      --ink: #172033;
+      --muted: #61708a;
+      --surface: #ffffff;
+      --soft: #f4f7fb;
+      --line: rgba(23, 32, 51, 0.14);
+      --shadow: 0 18px 50px rgba(18, 35, 63, 0.18);
+      --radius: 24px;
+
+      /* TODO: Replace with your own licensed/approved Montreal skyline image. */
+      --hero-image: url("assets/montreal-skyline.jpg");
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--soft);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    .hero {
+      min-height: 74vh;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      padding: 32px 18px;
+      background:
+        linear-gradient(135deg, rgba(18, 35, 63, 0.92), rgba(38, 91, 143, 0.70)),
+        var(--hero-image),
+        linear-gradient(135deg, #12233f, #265b8f);
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -110px -10%;
+      height: 220px;
+      background: var(--soft);
+      transform: rotate(-3deg);
+    }
+
+    .hero-inner {
+      width: min(1120px, 100%);
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 28px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 7vw, 5.4rem);
+      line-height: 0.96;
+      margin: 22px 0 18px;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      color: rgba(255,255,255,0.9);
+      margin: 0 0 28px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #1c2434;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border-color: rgba(255,255,255,0.30);
+      backdrop-filter: blur(8px);
+    }
+
+    .event-card {
+      background: rgba(255,255,255,0.92);
+      color: var(--ink);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.45);
+    }
+
+    .event-card h2 {
+      margin: 0 0 14px;
+      font-size: 1.3rem;
+    }
+
+    .facts {
+      display: grid;
+      gap: 12px;
+    }
+
+    .fact {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+      background: #f7f9fc;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .fact strong { display: block; }
+    .fact span { color: var(--muted); }
+
+    main {
+      width: min(1120px, calc(100% - 36px));
+      margin: -40px auto 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    section {
+      margin: 28px 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(18, 35, 63, 0.08);
+      overflow: hidden;
+    }
+
+    .section-pad { padding: clamp(22px, 4vw, 42px); }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-end;
+      margin-bottom: 22px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .mini-card {
+      padding: 20px;
+      border-radius: 20px;
+      background: #f8fafd;
+      border: 1px solid var(--line);
+    }
+
+    .mini-card h3 { margin: 0 0 8px; }
+    .mini-card p { margin: 0; color: var(--muted); }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      position: relative;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #fff;
+    }
+
+    .time {
+      font-weight: 800;
+      color: var(--brand-2);
+    }
+
+    .timeline-item h3 { margin: 0 0 6px; }
+    .timeline-item p { margin: 0; color: var(--muted); }
+
+    .route {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .route-card {
+      padding: 22px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #ffffff, #f7f9fc);
+      border: 1px solid var(--line);
+    }
+
+    .route-card .label {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .route-card h3 { margin: 7px 0 8px; }
+    .route-card p { margin: 0; color: var(--muted); }
+
+    .map-panel {
+      margin-top: 18px;
+      padding: 24px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at top left, rgba(215,180,106,0.25), transparent 28%),
+        linear-gradient(135deg, #12233f, #265b8f);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .map-panel p { margin: 0; color: rgba(255,255,255,0.82); }
+
+    .map-panel .btn { flex: 0 0 auto; }
+
+    .rsvp {
+      background:
+        linear-gradient(135deg, rgba(18,35,63,0.96), rgba(38,91,143,0.92)),
+        var(--hero-image),
+        linear-gradient(135deg, #12233f, #265b8f);
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+    }
+
+    .rsvp .section-pad {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .rsvp h2 { margin: 0 0 8px; }
+    .rsvp p { margin: 0; color: rgba(255,255,255,0.84); }
+
+    .fine-print {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    footer {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto 48px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.92rem;
+    }
+
+    .sticky-rsvp {
+      display: none;
+      position: fixed;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      z-index: 20;
+    }
+
+    .sticky-rsvp .btn {
+      width: 100%;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.24);
+    }
+
+    @media (max-width: 820px) {
+      .hero-inner,
+      .route,
+      .rsvp .section-pad {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3 { grid-template-columns: 1fr; }
+
+      .section-title {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .map-panel {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .map-panel .btn { width: 100%; }
+
+      .sticky-rsvp { display: block; }
+
+      footer { padding-bottom: 80px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    TODO LINKS
+    Replace these href values throughout the page:
+    - RSVP_FORM_URL: public Google Form URL, Microsoft Form URL, or mailto link
+    - MAP_ROUTE_URL: Google Maps route URL or preferred map link
+    - CALENDAR_URL: Google Calendar template link or assets/event.ics
+  -->
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Hosted Event • Montreal, QC</div>
+        <h1>Montreal Guided Tour + Facility Reception</h1>
+        <p class="hero-copy">
+          Join us for an evening guided tour across Montreal, followed by a facility visit and reception with drinks, charcuterie, and heavy hors d'oeuvres.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="RSVP_FORM_URL" target="_blank" rel="noopener">RSVP Now</a>
+          <a class="btn btn-secondary" href="#itinerary">View Itinerary</a>
+          <a class="btn btn-secondary" href="MAP_ROUTE_URL" target="_blank" rel="noopener">Open Route Map</a>
+        </div>
+      </div>
+
+      <aside class="event-card" aria-label="Event quick details">
+        <h2>Event Details</h2>
+        <div class="facts">
+          <div class="fact">
+            <div>📅</div>
+            <div><strong>TODO: Event Date</strong><span>Example: Tuesday, June 9, 2026</span></div>
+          </div>
+          <div class="fact">
+            <div>🕕</div>
+            <div><strong>TODO: Start–End Time</strong><span>Example: 5:30 PM – 9:00 PM ET</span></div>
+          </div>
+          <div class="fact">
+            <div>📍</div>
+            <div><strong>Departure</strong><span>201 Av. Viger O, Montréal, QC</span></div>
+          </div>
+          <div class="fact">
+            <div>🏢</div>
+            <div><strong>Reception</strong><span>2600 Av. André, Dorval, QC</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section id="overview">
+      <div class="section-pad">
+        <div class="section-title">
+          <h2>What to Expect</h2>
+          <p>A hosted evening designed to make the cross-town trip memorable, informative, and easy for guests.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="mini-card">
+            <h3>Guided City Tour</h3>
+            <p>Local commentary and Montreal highlights as we travel from the meeting point to the facility.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Hosted Bus Experience</h3>
+            <p>Comfortable group transportation with drinks provided during the ride.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Facility Reception</h3>
+            <p>Networking reception with charcuterie boards and heavy hors d'oeuvres after arrival.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="itinerary">
+      <div class="section-pad">
+        <div class="section-title">
+          <h2>Itinerary</h2>
+          <p>Replace the sample times below with the final agenda once transportation and facility timing are confirmed.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="time">5:15 PM</div>
+            <div>
+              <h3>Guest Arrival + Check-in</h3>
+              <p>Meet at TODO: hotel lobby / conference venue / curbside pickup area.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time">5:30 PM</div>
+            <div>
+              <h3>Depart for Guided Montreal Tour</h3>
+              <p>Board transportation for a guided city tour while traveling across town.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time">6:15 PM</div>
+            <div>
+              <h3>Scenic Route + City Highlights</h3>
+              <p>Guide shares Montreal history, neighborhoods, architecture, and points of interest along the route.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time">7:00 PM</div>
+            <div>
+              <h3>Arrive at Facility</h3>
+              <p>Welcome remarks and transition into the facility tour or reception area.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time">7:15 PM</div>
+            <div>
+              <h3>Reception</h3>
+              <p>Charcuterie, heavy hors d'oeuvres, drinks, and informal networking.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time">8:45 PM</div>
+            <div>
+              <h3>Return Transportation / Event Close</h3>
+              <p>TODO: confirm return shuttle timing, drop-off location, or rideshare guidance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="route">
+      <div class="section-pad">
+        <div class="section-title">
+          <h2>Route</h2>
+          <p>Use the map button for the planned cross-town route. Add optional tour stops or landmarks once finalized.</p>
+        </div>
+
+        <div class="route">
+          <div class="route-card">
+            <div class="label">Departure</div>
+            <h3>TODO: Starting Location Name</h3>
+            <p>201 Av. Viger O, Montréal, QC H2Z 1L1, Canada</p>
+          </div>
+          <div class="route-card">
+            <div class="label">Destination</div>
+            <h3>TODO: Facility Name</h3>
+            <p>2600 Av. André, Dorval, QC H9P 1K6, Canada</p>
+          </div>
+        </div>
+
+        <div class="map-panel">
+          <div>
+            <h3 style="margin:0 0 6px;">Open the planned route</h3>
+            <p>Recommended for guests who want pickup/drop-off details, travel time, or driving context.</p>
+          </div>
+          <a class="btn btn-primary" href="MAP_ROUTE_URL" target="_blank" rel="noopener">View Map</a>
+        </div>
+
+        <p class="fine-print">Optional: add a small screenshot of the route here if you want guests to see the path without leaving the page.</p>
+      </div>
+    </section>
+
+    <section id="guest-info">
+      <div class="section-pad">
+        <div class="section-title">
+          <h2>Guest Information</h2>
+          <p>Add any logistics that reduce back-and-forth questions from attendees.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="mini-card">
+            <h3>Transportation</h3>
+            <p>TODO: Describe shuttle/bus format, boarding location, departure deadline, and return plan.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Food + Beverage</h3>
+            <p>Drinks will be provided on the bus. Reception will include charcuterie and heavy hors d'oeuvres.</p>
+          </div>
+          <div class="mini-card">
+            <h3>Accessibility + Dietary Needs</h3>
+            <p>TODO: Ask guests to note dietary restrictions, accessibility needs, or guest count in the RSVP form.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rsvp" class="rsvp">
+      <div class="section-pad">
+        <div>
+          <h2>Reserve Your Spot</h2>
+          <p>Please RSVP by TODO: RSVP deadline. Capacity may be limited based on transportation and reception planning.</p>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href="RSVP_FORM_URL" target="_blank" rel="noopener">RSVP Now</a>
+          <a class="btn btn-secondary" href="CALENDAR_URL" target="_blank" rel="noopener">Add to Calendar</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>Hosted by TODO: Company Name</div>
+    <div>Questions? <a href="mailto:TODO_CONTACT_EMAIL">TODO_CONTACT_EMAIL</a></div>
+  </footer>
+
+  <div class="sticky-rsvp" aria-label="Sticky RSVP button">
+    <a class="btn btn-primary" href="RSVP_FORM_URL" target="_blank" rel="noopener">RSVP Now</a>
+  </div>
+
+  <!--
+    OPTIONAL: Pre-built Google Maps route URL for your known route.
+    Replace MAP_ROUTE_URL above with the full line below if you want to use Google Maps.
+
+    https://www.google.com/maps/dir/?api=1&origin=201%20Av.%20Viger%20O%2C%20Montr%C3%A9al%2C%20QC%20H2Z%201L1%2C%20Canada&destination=2600%20Av.%20Andr%C3%A9%2C%20Dorval%2C%20QC%20H9P%201K6%2C%20Canada&travelmode=driving
+  -->
+</body>
+</html>
