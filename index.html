@@ -86,7 +86,11 @@
       position: relative;
       z-index: 1;
     }
-
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
     .eyebrow {
       display: inline-flex;
       align-items: center;
@@ -100,24 +104,30 @@
       letter-spacing: 0.03em;
       text-transform: uppercase;
     }
-    .brand-logo {
-      display: block;
-      width: min(260px, 70vw);
-      max-height: 90px;
-      object-fit: contain;
-      margin: 22px 0 18px;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.22));
-    }
-
     .brand-logo-wrap {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: flex-start;
+      width: fit-content;
+      max-width: 100%;
+      margin: 22px 0 14px;
+      padding: 16px 24px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 22px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.22);
+    }
+
+    .brand-logo {
+      display: block;
+      width: min(390px, 82vw);
+      max-height: 120px;
+      object-fit: contain;
     }
     h1 {
       font-size: clamp(2.4rem, 7vw, 5.4rem);
       line-height: 0.96;
-      margin: 22px 0 18px;
+      margin: 8px 0 18px;
       letter-spacing: -0.05em;
     }
 
@@ -373,7 +383,15 @@
       .route,
       .rsvp .section-pad {
         grid-template-columns: 1fr;
-      }
+      .brand-logo-wrap {
+        padding: 12px 16px;
+       }
+
+      .brand-logo {
+         width: min(320px, 82vw);
+         max-height: 100px;
+       }
+    }
 
       .grid-3 { grid-template-columns: 1fr; }
 
@@ -412,7 +430,7 @@
 
   <header class="hero">
     <div class="hero-inner">
-      <div>
+      <div class="hero-content"> 
         <div class="eyebrow">Hosted Event • Montreal, QC</div>
 
         <div class="brand-logo-wrap" aria-label="Powerside logo">
@@ -558,7 +576,7 @@
             <h3 style="margin:0 0 6px;">Open the planned route</h3>
             <p>Recommended for guests who want pickup/drop-off details, travel time, or driving context.</p>
           </div>
-          <a class="btn btn-primary" href="MAP_ROUTE_URL" target="_blank" rel="noopener">View Map</a>
+          <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&origin=201%20Av.%20Viger%20O%2C%20Montr%C3%A9al%2C%20QC%20H2Z%201L1%2C%20Canada&destination=2600%20Av.%20Andr%C3%A9%2C%20Dorval%2C%20QC%20H9P%201K6%2C%20Canada&travelmode=driving" target="_blank" rel="noopener">View Map</a>
         </div>
 
         <p class="fine-print">Optional: add a small screenshot of the route here if you want guests to see the path without leaving the page.</p>
